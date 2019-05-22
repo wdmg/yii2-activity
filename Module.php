@@ -24,7 +24,7 @@ class Module extends \yii\base\Module
     /**
      * {@inheritdoc}
      */
-    public $controllerNamespace = 'wdmg\comments\controllers';
+    public $controllerNamespace = 'wdmg\activity\controllers';
 
     /**
      * {@inheritdoc}
