@@ -1,0 +1,47 @@
+<?php
+
+use yii\db\Migration;
+
+/**
+ * Class m220519_145317_activity
+ */
+class m220519_145317_activity extends Migration
+{
+    /**
+     * {@inheritdoc}
+     */
+    public function safeUp()
+    {
+
+        $tableOptions = null;
+        if ($this->db->driverName === 'mysql') {
+            $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB';
+        }
+
+        $this->createTable('{{%activity}}', [
+            'id' => $this->primaryKey(),
+            'type' => $this->string(255)->notNull(),
+            'message' => $this->text(),
+            'created_by' => $this->integer(11)->notNull()->defaultValue(0),
+            'created_at' => $this->integer(11)->notNull(),
+            'action' => $this->string(255)->notNull(),
+            'metadata' => $this->text(),
+        ], $tableOptions);
+
+        $this->createIndex('{{%idx-activity-action}}', '{{%activity}}', 'action');
+        $this->createIndex('{{%idx-activity-type}}', '{{%activity}}', 'type');
+
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function safeDown()
+    {
+        $this->truncateTable('{{%activity}}');
+        $this->dropIndex('{{%idx-activity-action}}', '{{%activity}}');
+        $this->dropIndex('{{%idx-activity-type}}', '{{%activity}}');
+        $this->dropTable('{{%activity}}');
+    }
+
+}

@@ -1,0 +1,35 @@
+{
+  "name": "wdmg/yii2-activity",
+  "description": "User activity tracking system for Yii2",
+  "keywords": ["yii2", "yii2-activity", "activity", "tracking", "wdmg"],
+  "type": "yii2-extension",
+  "license": "MIT",
+  "version": "0.0.1",
+  "homepage": "https://github.com/wdmg/yii2-activity",
+  "support": {
+    "source": "https://github.com/wdmg/yii2-activity",
+    "issues": "https://github.com/wdmg/yii2-activity/issues"
+  },
+  "authors": [
+    {
+      "name": "Alexsander Vyshnyvetskyy",
+      "email": "alex.vyshnyvetskyy@gmail.com"
+    },
+    {
+      "name": "W.D.M.Group, Ukraine",
+      "email": "wdmg.com.ua@gmail.com"
+    }
+  ],
+  "require": {
+    "yiisoft/yii2": "^2.0.13"
+  },
+  "minimum-stability": "dev",
+  "autoload": {
+    "psr-4": {
+      "wdmg\\activity\\": ""
+    }
+  },
+  "extra": {
+    "bootstrap": "wdmg\\activity\\Bootstrap"
+  }
+}
