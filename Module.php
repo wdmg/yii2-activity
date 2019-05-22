@@ -6,7 +6,7 @@ namespace wdmg\activity;
  * Yii2 Activity
  *
  * @category        Module
- * @version         1.0.0
+ * @version         1.1.0
  * @author          Alexsander Vyshnyvetskyy <alex.vyshnyvetskyy@gmail.com>
  * @link            https://github.com/wdmg/yii2-comments
  * @copyright       Copyright (c) 2019 W.D.M.Group, Ukraine
@@ -44,7 +44,7 @@ class Module extends \yii\base\Module
     /**
      * @var string the module version
      */
-    private $version = "1.0.0";
+    private $version = "1.1.0";
 
     /**
      * @var integer, priority of initialization

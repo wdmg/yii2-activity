@@ -53,7 +53,14 @@ Use the `setActivity($message = null, $action = null, $type = null, $level = 1)`
     
         if($model->login()) {
             $activity = new Activity;
-            $activity->setActivity( 'User has successfully login.', 'login', 'info', 2);
+            $activity->setActivity('User has successfully login.', 'login', 'info', 2);
+            ...
+        }
+        
+        // or from component
+        
+        if($model->login()) {
+            Yii::$app->activity->set('User has successfully login.', 'login', 'info', 2);
             ...
         }
         
@@ -75,4 +82,5 @@ Use the `Module::dashboardNavItems()` method of the module to generate a navigat
     ?>
 
 # Status and version [in progress development]
+* v.1.1.0 - Added and configure activity component
 * v.1.0.0 - First pre-release

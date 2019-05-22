@@ -44,5 +44,12 @@ class Bootstrap implements BootstrapInterface
             ],
             true
         );
+
+        // Configure activity component
+        $app->setComponents([
+            'activity' => [
+                'class' => 'wdmg\activity\components\Activity'
+            ]
+        ]);
     }
 }
