@@ -81,13 +81,12 @@ class Activity extends ActiveRecord
      * Set in logs user activity.
      * @return bool whether the activity is saved successfully.
      */
-    public function setActivity($user_id = null, $message = null, $action = null, $type = null, $level = 1)
+    public function setActivity($message = null, $action = null, $type = null, $level = 1)
     {
-
         $model = Yii::createObject(__CLASS__);
         $model->type = ($type !== null) ? $type : self::LOG_TYPE_INFO;
         $model->message = ($message !== null) ? serialize($message) : null;
-        $model->created_by = ((int)$user_id !== 0) ? (int)$user_id : (int)self::getUserID();
+        $model->created_by = (int)self::getUserID();
         $model->action = ($action !== null) ? $action : null;
 
         // Write log activity to file
@@ -134,6 +133,7 @@ class Activity extends ActiveRecord
      */
     public static function getUsernameByID($user_id = null)
     {
+        $user = null;
         if(class_exists('\wdmg\users\models\Users') && isset(Yii::$app->modules['users']) && $user_id)
             $user = \wdmg\users\models\Users::findOne(['id' => intval($user_id)]);
 

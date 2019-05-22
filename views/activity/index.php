@@ -8,7 +8,7 @@ use wdmg\widgets\SelectInput;
 use yii\bootstrap\Modal;
 
 /* @var $this yii\web\View */
-/* @var $searchModel wdmg\options\models\OptionsSearch */
+/* @var $model wdmg\activity\models\Activity */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = Yii::t('app/modules/activity', 'User activity');
@@ -17,7 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
 $this->registerJs(<<< JS
 
     $(document).ready(function() {
-        if($('#activityAjax').size() > 0)
+        if($('#activityAjax').length > 0)
             setInterval(function(){ $.pjax.reload({container:'#activityAjax'}); }, 3000);
     });
 
