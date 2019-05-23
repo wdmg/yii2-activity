@@ -14,17 +14,14 @@ use yii\bootstrap\Modal;
 $this->title = Yii::t('app/modules/activity', 'User activity');
 $this->params['breadcrumbs'][] = $this->title;
 
-$this->registerJs(<<< JS
-
-    $(document).ready(function() {
-        if($('#activityAjax').length > 0)
-            setInterval(function(){ $.pjax.reload({container:'#activityAjax'}); }, 3000);
-    });
-
-JS
+$this->registerJs(
+'setInterval(function(){
+        $.pjax.reload({container:\'#activityAjax\'});
+    }, 5000);', \yii\web\View::POS_READY
 );
 
 ?>
+
 <div class="page-header">
     <h1>
         <?= Html::encode($this->title) ?> <small class="text-muted pull-right">[v.<?= $this->context->module->version ?>]</small>
@@ -32,7 +29,10 @@ JS
 </div>
 <div class="activity-index">
     <?php
-        Pjax::begin(['id' => 'activityAjax']);
+        Pjax::begin([
+            'id' => 'activityAjax',
+            'timeout' => 5000
+        ]);
         echo GridView::widget([
             'dataProvider' => $activity,
             'columns' => [
