@@ -11,7 +11,7 @@ use yii\bootstrap\Modal;
 /* @var $model wdmg\activity\models\Activity */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app/modules/activity', 'User activity');
+$this->title = $this->context->module->name;
 $this->params['breadcrumbs'][] = $this->title;
 
 $this->registerJs(

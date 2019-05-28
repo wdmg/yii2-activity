@@ -82,5 +82,5 @@ Use the `Module::dashboardNavItems()` method of the module to generate a navigat
     ?>
 
 # Status and version [in progress development]
+* v.1.1.1 - Added module name and description
 * v.1.1.0 - Added and configure activity component
-* v.1.0.0 - First pre-release

@@ -2,6 +2,8 @@
 
 return [
     'Activity' => "Активность",
+    'User activity tracking system' => "Система отслеживания активности пользователей",
+
     'User activity' => "Активность пользователей",
 
     'ID' => "ИД",
