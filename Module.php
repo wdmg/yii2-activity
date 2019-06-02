@@ -6,7 +6,7 @@ namespace wdmg\activity;
  * Yii2 Activity
  *
  * @category        Module
- * @version         1.1.2
+ * @version         1.1.3
  * @author          Alexsander Vyshnyvetskyy <alex.vyshnyvetskyy@gmail.com>
  * @link            https://github.com/wdmg/yii2-comments
  * @copyright       Copyright (c) 2019 W.D.M.Group, Ukraine
@@ -15,6 +15,7 @@ namespace wdmg\activity;
  */
 
 use Yii;
+use yii\helpers\Url;
 
 /**
  * Activity module definition class
@@ -29,7 +30,7 @@ class Module extends \yii\base\Module
     /**
      * {@inheritdoc}
      */
-    public $defaultRoute = 'default';
+    public $defaultRoute = 'activity/index';
 
     /**
      * @var string the prefix for routing of module
@@ -54,7 +55,7 @@ class Module extends \yii\base\Module
     /**
      * @var string the module version
      */
-    private $version = "1.1.2";
+    private $version = "1.1.3";
 
     /**
      * @var integer, priority of initialization
@@ -157,7 +158,7 @@ class Module extends \yii\base\Module
     {
         return [
             'label' => $this->name,
-            'url' => [$this->routePrefix . '/activity/'],
+            'url' => Url::to($this->routePrefix.'/activity'),
             'active' => in_array(\Yii::$app->controller->module->id, ['activity'])
         ];
     }
