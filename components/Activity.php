@@ -7,7 +7,7 @@ namespace wdmg\activity\components;
  * Yii2 Activity
  *
  * @category        Component
- * @version         1.1.3
+ * @version         1.1.4
  * @author          Alexsander Vyshnyvetskyy <alex.vyshnyvetskyy@gmail.com>
  * @link            https://github.com/wdmg/yii2-messages
  * @copyright       Copyright (c) 2019 W.D.M.Group, Ukraine

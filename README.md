@@ -39,13 +39,6 @@ To add a module to the project, add the following data in your configuration fil
         ...
     ],
 
-If you have connected the module not via a composer add Bootstrap section:
-
-
-    $config['bootstrap'][] = 'wdmg\activity\Bootstrap';
-    
-
-
 # Usecase
 Use the `setActivity($message = null, $action = null, $type = null, $level = 1)` method to log events and user actions, you can use the construction
 
@@ -82,5 +75,5 @@ Use the `Module::dashboardNavItems()` method of the module to generate a navigat
     ?>
 
 # Status and version [in progress development]
+* v.1.1.4 - Module transferred to base module interface. Update Yii2 version.
 * v.1.1.3 - Bugfix, routing and refactoring
-* v.1.1.2 - Update Yii2 version
