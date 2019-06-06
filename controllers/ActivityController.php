@@ -10,6 +10,7 @@ use yii\web\NotFoundHttpException;
 use yii\web\Response;
 use yii\data\ActiveDataProvider;
 use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
 
 /**
  * ActivityController implements the CRUD actions for Settings model.
@@ -27,6 +28,15 @@ class ActivityController extends Controller
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'index' => ['get'],
+                ],
+            ],
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'roles' => ['admin'],
+                        'allow' => true
+                    ],
                 ],
             ],
         ];
