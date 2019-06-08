@@ -78,4 +78,3 @@ Use the `Module::dashboardNavItems()` method of the module to generate a navigat
 # Status and version [in progress development]
 * v.1.1.5 - Module refactoring
 * v.1.1.4 - Module transferred to base module interface. Update Yii2 version.
-* v.1.1.3 - Bugfix, routing and refactoring
