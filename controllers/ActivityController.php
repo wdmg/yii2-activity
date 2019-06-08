@@ -23,7 +23,7 @@ class ActivityController extends Controller
      */
     public function behaviors()
     {
-        return [
+        $behaviors = [
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
@@ -40,6 +40,22 @@ class ActivityController extends Controller
                 ],
             ],
         ];
+
+        // If auth manager not configured use default access control
+        if(!Yii::$app->authManager) {
+            $behaviors['access'] = [
+                'class' => AccessControl::className(),
+                'except' => ['login'],
+                'rules' => [
+                    [
+                        'roles' => ['@'],
+                        'allow' => true
+                    ]
+                ],
+            ];
+        }
+
+        return $behaviors;
     }
 
     /**
