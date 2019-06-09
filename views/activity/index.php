@@ -73,9 +73,10 @@ $this->registerJs(
 
                         $content = '';
                         $metadata = unserialize($model->metadata);
+
                         if(count($metadata) > 0 && is_array($metadata)) {
                             foreach($metadata as $key => $value) {
-                                $content .= '<b>'.$key.'</b>&nbsp;'.$value.'<br/>';
+                                $content .= '<b>'.$key.'</b>&nbsp;'.var_export($value, true).'<br/>';
                             }
                         }
 
