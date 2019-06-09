@@ -16,6 +16,7 @@ namespace wdmg\activity;
 
 use Yii;
 use wdmg\base\BaseModule;
+use yii\base\Controller;
 
 /**
  * Activity module definition class
@@ -80,5 +81,21 @@ class Module extends BaseModule
                 'class' => 'wdmg\activity\components\Activity'
             ]
         ]);
+
+        if(!($app instanceof \yii\console\Application) && $this->module) {
+
+            // Register simply activity
+            \yii\base\Event::on(\yii\base\Controller::className(), \yii\base\Controller::EVENT_BEFORE_ACTION, function ($event) {
+                if (!Yii::$app->request->isAjax) {
+                    $status = 'info';
+                    if (Yii::$app->response->getStatusCode() >= 400 && Yii::$app->response->getStatusCode() < 500)
+                        $status = 'warning';
+                    else if (Yii::$app->response->getStatusCode() >= 500)
+                        $status = 'danger';
+
+                    Yii::$app->activity->set('User has request URI: ' . Yii::$app->request->getUrl(), $event->name, $status, 2);
+                }
+            });
+        }
     }
 }

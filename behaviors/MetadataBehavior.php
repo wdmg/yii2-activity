@@ -21,12 +21,19 @@ class MetadataBehavior extends Behavior
 
     public function getMetaData($event)
     {
-        $metadata = '';
+        $metadata = [
+            'uri' => Yii::$app->request->getAbsoluteUrl(),
+            'refferer' => Yii::$app->request->getReferrer(),
+            'status' => Yii::$app->response->getStatusCode(),
+            'route' => Yii::$app->requestedRoute
+        ];
+
         if(($this->owner->{$this->in_attribute} == 'login') || ($this->owner->{$this->in_attribute} == 'logout')) {
-            $metadata = [
+            $metadata[] = [
                 'user_ip' => Activity::getUserIp()
             ];
         }
+
         $this->owner->{$this->out_attribute} = serialize($metadata);
     }
 
