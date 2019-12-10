@@ -44,7 +44,7 @@ class Activity extends ActiveRecord
         ];
 
         if(class_exists('\wdmg\users\models\Users') && isset(Yii::$app->modules['users']))
-            $rules[] = [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => \wdmg\users\models\Users::className(), 'targetAttribute' => ['user_id' => 'id']];
+            $rules[] = [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => \wdmg\users\models\Users::class, 'targetAttribute' => ['user_id' => 'id']];
 
         return $rules;
     }

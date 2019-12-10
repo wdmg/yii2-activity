@@ -25,13 +25,13 @@ class ActivityController extends Controller
     {
         $behaviors = [
             'verbs' => [
-                'class' => VerbFilter::className(),
+                'class' => VerbFilter::class,
                 'actions' => [
                     'index' => ['get'],
                 ],
             ],
             'access' => [
-                'class' => AccessControl::className(),
+                'class' => AccessControl::class,
                 'rules' => [
                     [
                         'roles' => ['admin'],
@@ -44,7 +44,7 @@ class ActivityController extends Controller
         // If auth manager not configured use default access control
         if(!Yii::$app->authManager) {
             $behaviors['access'] = [
-                'class' => AccessControl::className(),
+                'class' => AccessControl::class,
                 'except' => ['login'],
                 'rules' => [
                     [

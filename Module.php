@@ -6,7 +6,7 @@ namespace wdmg\activity;
  * Yii2 Activity
  *
  * @category        Module
- * @version         1.1.7
+ * @version         1.1.8
  * @author          Alexsander Vyshnyvetskyy <alex.vyshnyvetskyy@gmail.com>
  * @link            https://github.com/wdmg/yii2-activity
  * @copyright       Copyright (c) 2019 W.D.M.Group, Ukraine
@@ -46,7 +46,7 @@ class Module extends BaseModule
     /**
      * @var string the module version
      */
-    private $version = "1.1.7";
+    private $version = "1.1.8";
 
     /**
      * @var integer, priority of initialization
@@ -99,7 +99,7 @@ class Module extends BaseModule
         if(!($app instanceof \yii\console\Application) && $this->module) {
 
             // Register simply activity
-            \yii\base\Event::on(\yii\base\Controller::className(), \yii\base\Controller::EVENT_BEFORE_ACTION, function ($event) {
+            \yii\base\Event::on(\yii\base\Controller::class, \yii\base\Controller::EVENT_BEFORE_ACTION, function ($event) {
                 if (!Yii::$app->request->isAjax) {
                     $status = 'info';
                     if (Yii::$app->response->getStatusCode() >= 400 && Yii::$app->response->getStatusCode() < 500)
