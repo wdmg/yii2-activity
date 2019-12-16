@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 $this->registerJs(
 'setInterval(function(){
-        $.pjax.reload({container:\'#activityAjax\'});
+        $.pjax.reload({timeout: false, container:\'#activityAjax\'});
     }, 5000);', \yii\web\View::POS_READY
 );
 
