@@ -1,7 +1,11 @@
 Changelog
 =========
 
+## 1.1.9 (2020-03-25)
+ * Added pagination, up to date dependencies
+
 ## 1.1.8 (2019-12-10)
+ * Disable timeout for main activity list
  * Fixed deprecated class declaration
 
 ## 1.1.7 (2019-07-16)

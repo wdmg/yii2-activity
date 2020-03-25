@@ -107,7 +107,22 @@ $this->registerJs(
             'tableOptions' => [
                 'id' => 'activityList',
                 'class' => 'table table-striped table-vertical table-bordered table-responsive'
-            ]
+            ],
+            'pager' => [
+                'options' => [
+                    'class' => 'pagination',
+                ],
+                'maxButtonCount' => 5,
+                'activePageCssClass' => 'active',
+                'prevPageCssClass' => '',
+                'nextPageCssClass' => '',
+                'firstPageCssClass' => 'previous',
+                'lastPageCssClass' => 'next',
+                'firstPageLabel' => Yii::t('app/modules/activity', 'First page'),
+                'lastPageLabel'  => Yii::t('app/modules/activity', 'Last page'),
+                'prevPageLabel'  => Yii::t('app/modules/activity', '&larr; Prev page'),
+                'nextPageLabel'  => Yii::t('app/modules/activity', 'Next page &rarr;')
+            ],
         ]);
         Pjax::end();
     ?>
