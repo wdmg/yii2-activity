@@ -35,6 +35,7 @@ $this->registerJs(
         ]);
         echo GridView::widget([
             'dataProvider' => $activity,
+            'layout' => '{summary}<br\/>{items}<br\/>{summary}<br\/><div class="text-center">{pager}</div>',
             'columns' => [
                 [
                     "attribute" => "id",

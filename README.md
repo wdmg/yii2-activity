@@ -39,7 +39,13 @@ To add a module to the project, add the following data in your configuration fil
         ...
         'activity' => [
             'class' => 'wdmg\activity\Module',
-            'routePrefix' => 'admin'
+            'routePrefix' => 'admin',
+            'surfingActivity': false, // Log of web-surfing activity
+            'backendSurfing': true, // Log of web-surfing activity by backend.
+            'frontendSurfing': false, // Log of web-surfing activity by frontend.
+            'ignoringRoutes': [], // Ignoring activity by request route
+            'ignoringUsers': [], // Ignoring activity by user ID
+            'ignoringIp': [] // Ignoring activity by user IP
         ],
         ...
     ],
@@ -80,6 +86,7 @@ Use the `Module::dashboardNavItems()` method of the module to generate a navigat
     ?>
 
 # Status and version [in progress development]
+* v.1.1.10 - Added properties, refactoring setActivity() method
 * v.1.1.9 - Added pagination, up to date dependencies
 * v.1.1.8 - Fixed deprecated class declaration
 * v.1.1.7 - Added extra options to composer.json and navbar menu icon

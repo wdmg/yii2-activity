@@ -1,6 +1,9 @@
 Changelog
 =========
 
+## 1.1.10 (2020-03-31)
+ * Added properties, refactoring setActivity() method
+ 
 ## 1.1.9 (2020-03-25)
  * Added pagination, up to date dependencies
 

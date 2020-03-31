@@ -87,7 +87,7 @@ class Activity extends ActiveRecord
         $model->type = ($type !== null) ? $type : self::LOG_TYPE_INFO;
         $model->message = ($message !== null) ? serialize($message) : null;
         $model->created_by = (int)self::getUserID();
-        $model->action = ($action !== null) ? $action : null;
+        $model->action = ($action !== null) ? $action : __METHOD__;
 
         // Write log activity to file
         if(intval($level) > 1) {
@@ -111,7 +111,7 @@ class Activity extends ActiveRecord
     public static function getUserID()
     {
         $user = Yii::$app->user->identity;
-        return $user && !Yii::$app->user->isGuest ? $user->id : 0;
+        return $user && !(Yii::$app->user->isGuest) ? intval($user->id) : null;
     }
 
     /**
@@ -134,10 +134,23 @@ class Activity extends ActiveRecord
     public static function getUsernameByID($user_id = null)
     {
         $user = null;
-        if(class_exists('\wdmg\users\models\Users') && isset(Yii::$app->modules['users']) && $user_id)
+        if(class_exists('\wdmg\users\models\Users') && $user_id)
             $user = \wdmg\users\models\Users::findOne(['id' => intval($user_id)]);
 
         return $user ? $user->username : null;
+    }
+
+
+    /**
+     * @return object of \yii\db\ActiveQuery
+     */
+    public function getCreatedBy()
+    {
+        if (class_exists('\wdmg\users\models\Users')) {
+            return $this->hasOne(\wdmg\users\models\Users::class, ['id' => 'created_by']);
+        } else {
+            return $this->created_by;
+        }
     }
 
     /**
