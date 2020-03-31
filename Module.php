@@ -31,7 +31,7 @@ class Module extends BaseModule
     /**
      * {@inheritdoc}
      */
-    public $defaultRoute = 'activity/index';
+    public $defaultRoute = 'list/index';
 
     /**
      * @var string, the name of module
@@ -144,9 +144,9 @@ class Module extends BaseModule
     {
         $items = [
             'label' => $this->name,
-            'url' => [$this->routePrefix . '/'. $this->id],
             'icon' => 'fa fa-fw fa-chart-bar',
-            'active' => in_array(\Yii::$app->controller->module->id, [$this->id])
+            'url' => [$this->routePrefix . '/'. $this->id],
+            'active' => (in_array(\Yii::$app->controller->module->id, [$this->id]) &&  Yii::$app->controller->id == 'list'),
         ];
         return $items;
     }

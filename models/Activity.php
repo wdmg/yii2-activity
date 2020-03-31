@@ -85,7 +85,7 @@ class Activity extends ActiveRecord
     {
         $model = Yii::createObject(__CLASS__);
         $model->type = ($type !== null) ? $type : self::LOG_TYPE_INFO;
-        $model->message = ($message !== null) ? serialize($message) : null;
+        $model->message = ($message !== null) ? trim($message) : null;
         $model->created_by = (int)self::getUserID();
         $model->action = ($action !== null) ? $action : __METHOD__;
 

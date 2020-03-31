@@ -54,7 +54,7 @@ $this->registerJs(
                 [
                     "attribute" => "message",
                     'value' => function($model, $indx) {
-                        return unserialize($model['message']);
+                        return $model->message;
                     },
                 ],
                 [
@@ -72,19 +72,21 @@ $this->registerJs(
                     'format' => 'raw',
                     'value' => function($model) {
 
-                        $content = '';
+                        $content = '<div>';
                         $metadata = unserialize($model->metadata);
-
-                        if(count($metadata) > 0 && is_array($metadata)) {
+                        if (count($metadata) > 0 && is_array($metadata)) {
                             foreach($metadata as $key => $value) {
                                 $content .= '<b>'.$key.'</b>&nbsp;'.var_export($value, true).'<br/>';
                             }
                         }
+                        $content .= '</div>';
 
                         return Html::a('<span class="fa fa-fw fa-ellipsis-v"></span></a>', '#', [
                             'data' => [
                                 'toggle' => 'popover',
                                 'content' => $content,
+                                'html' => 'true',
+                                'template' => '<div class="popover" role="tooltip" style="max-width: auto !important;"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>',
                                 'placement' => 'auto left',
                                 'pjax' => '0',
                             ]

@@ -3,19 +3,18 @@
 namespace wdmg\activity\controllers;
 
 use Yii;
-use wdmg\activity\models\Activity;
 use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\web\Response;
 use yii\data\ActiveDataProvider;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
+use wdmg\activity\models\Activity;
 
 /**
- * ActivityController implements the CRUD actions for Settings model.
+ * ListController implements the CRUD actions for Activity model.
  */
-class ActivityController extends Controller
+class ListController extends Controller
 {
 
     /**
