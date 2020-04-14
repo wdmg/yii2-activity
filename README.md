@@ -1,7 +1,7 @@
-[![Progress](https://img.shields.io/badge/required-Yii2_v2.0.33-blue.svg)](https://packagist.org/packages/yiisoft/yii2)
-[![Github all releases](https://img.shields.io/github/downloads/wdmg/yii2-activity/total.svg)](https://GitHub.com/wdmg/yii2-activity/releases/)
-[![GitHub version](https://badge.fury.io/gh/wdmg%2Fyii2-activity.svg)](https://github.com/wdmg/yii2-activity)
-![Progress](https://img.shields.io/badge/ready_to_use-green.svg)
+[![Yii2](https://img.shields.io/badge/required-Yii2_v2.0.33-blue.svg)](https://packagist.org/packages/yiisoft/yii2)
+[![Downloads](https://img.shields.io/packagist/dt/wdmg/yii2-activity.svg)](https://packagist.org/packages/wdmg/yii2-activity)
+[![Packagist Version](https://img.shields.io/packagist/v/wdmg/yii2-activity.svg)](https://packagist.org/packages/wdmg/yii2-activity)
+![Progress](https://img.shields.io/badge/progress-ready_to_use-green.svg)
 [![GitHub license](https://img.shields.io/github/license/wdmg/yii2-activity.svg)](https://github.com/wdmg/yii2-activity/blob/master/LICENSE)
 
 # Yii2 Activity Module
