@@ -1,6 +1,11 @@
 Changelog
 =========
 
+## 1.1.11 (2020-04-28)
+ * Update README.md and dependencies
+ * Updating year in copyrights
+ * Change icon class (FontAwesome update)
+ 
 ## 1.1.10 (2020-03-31)
  * Added properties, refactoring setActivity() method
  
