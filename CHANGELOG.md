@@ -1,6 +1,9 @@
 Changelog
 =========
 
+## 1.1.*
+ * Nav link and html in activity log message
+ 
 ## 1.1.11 (2020-04-28)
  * Update README.md and dependencies
  * Updating year in copyrights

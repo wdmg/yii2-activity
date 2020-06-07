@@ -53,6 +53,7 @@ $this->registerJs(
                 ],
                 [
                     "attribute" => "message",
+                    "format" => "html",
                     'value' => function($model, $indx) {
                         return $model->message;
                     },
