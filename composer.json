@@ -4,7 +4,7 @@
   "keywords": ["yii2", "yii2-activity", "activity", "tracking", "wdmg"],
   "type": "yii2-extension",
   "license": "MIT",
-  "version": "1.1.11",
+  "version": "1.1.12",
   "homepage": "https://github.com/wdmg/yii2-activity",
   "support": {
     "source": "https://github.com/wdmg/yii2-activity",
@@ -21,8 +21,8 @@
     }
   ],
   "require": {
-    "yiisoft/yii2": "^2.0.33",
-    "wdmg/yii2-base": "^1.2.0"
+    "yiisoft/yii2": "^2.0.35",
+    "wdmg/yii2-base": "^1.2.4"
   },
   "minimum-stability": "dev",
   "autoload": {

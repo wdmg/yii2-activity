@@ -1,7 +1,9 @@
 Changelog
 =========
 
-## 1.1.*
+## 1.1.12 (2020-06-14)
+ * Update README.md and dependencies
+ * Added clear users activity log from console
  * Nav link and html in activity log message
  
 ## 1.1.11 (2020-04-28)
