@@ -44,42 +44,49 @@ class Activity extends Component
     public function set($message = null, $action = null, $type = null, $level = 1)
     {
 
-        $ignoringByRoute = false;
-        if (is_array($this->module->ignoringRoutes)) {
+        $ignoring = false;
 
-            $url = Yii::$app->request->getUrl();
-            foreach ($this->module->ignoringRoutes as $pattern) {
-                if (preg_match("/^" . preg_quote($pattern, "/") . "/", $url)) {
-                    $ignoringByRoute = true;
-                    break;
+        // Disable ignoring by URL and auth users for console application
+        if (!$this->module->isConsole()) {
+
+            $ignoringByRoute = false;
+            if (is_array($this->module->ignoringRoutes)) {
+
+                $url = Yii::$app->request->getUrl();
+                foreach ($this->module->ignoringRoutes as $pattern) {
+                    if (preg_match("/^" . preg_quote($pattern, "/") . "/", $url)) {
+                        $ignoringByRoute = true;
+                        break;
+                    }
                 }
+
             }
 
+            $ignoringByUser = false;
+            if (is_array($this->module->ignoringUsers)) {
+
+                $user_id = $this->model->getUserID();
+                if (in_array($user_id, $this->module->ignoringUsers))
+                    $ignoringByUser = true;
+
+            }
+
+
+            $ignoringByIp = false;
+            if (is_array($this->module->ignoringIp)) {
+
+                $user_ip = $this->model->getUserIp();
+                if (in_array($user_ip, $this->module->ignoringIp))
+                    $ignoringByIp = true;
+
+            }
+
+            $ignoring = (
+                $ignoringByRoute ||
+                $ignoringByUser ||
+                $ignoringByIp
+            );
         }
-
-        $ignoringByUser = false;
-        if (is_array($this->module->ignoringUsers)) {
-
-            $user_id = $this->model->getUserID();
-            if (in_array($user_id, $this->module->ignoringUsers))
-                $ignoringByUser = true;
-
-        }
-
-        $ignoringByIp = false;
-        if (is_array($this->module->ignoringIp)) {
-
-            $user_ip = $this->model->getUserIp();
-            if (in_array($user_ip, $this->module->ignoringIp))
-                $ignoringByIp = true;
-
-        }
-
-        $ignoring = (
-            $ignoringByRoute ||
-            $ignoringByUser ||
-            $ignoringByIp
-        );
 
         if (!$ignoring && $this->model->setActivity($message, $action, $type, $level)) {
             return true;

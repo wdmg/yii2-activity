@@ -1,6 +1,9 @@
 Changelog
 =========
 
+## 1.1.*
+ * Fixies for console operations
+ 
 ## 1.1.12 (2020-06-14)
  * Update README.md and dependencies
  * Added clear users activity log from console

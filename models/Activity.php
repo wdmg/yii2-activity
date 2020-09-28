@@ -106,23 +106,31 @@ class Activity extends ActiveRecord
     /**
      * Get user ID
      *
-     * @return int user id or null (0) if user guest
+     * @return int|null user id or null (0) if user guest
      */
     public static function getUserID()
     {
-        $user = Yii::$app->user->identity;
-        return $user && !(Yii::$app->user->isGuest) ? intval($user->id) : null;
+        if (!Yii::$app->request->isConsoleRequest) {
+            $user = Yii::$app->user->identity;
+            return $user && !(Yii::$app->user->isGuest) ? intval($user->id) : null;
+        } else {
+            return 0;
+        }
     }
 
     /**
      * Get user IP
      *
-     * @return int user remote IP
+     * @return string|null user remote IP
      */
     public static function getUserIp()
     {
-        $remote_addr = inet_pton(Yii::$app->getRequest()->getUserIP());
-        return long2ip(ip2long(inet_ntop($remote_addr)));
+        if (!Yii::$app->request->isConsoleRequest) {
+            $remote_addr = inet_pton(Yii::$app->getRequest()->getUserIP());
+            return long2ip(ip2long(inet_ntop($remote_addr)));
+        } else {
+            return null;
+        }
     }
 
     /**
@@ -134,7 +142,7 @@ class Activity extends ActiveRecord
     public static function getUsernameByID($user_id = null)
     {
         $user = null;
-        if(class_exists('\wdmg\users\models\Users') && $user_id)
+        if (class_exists('\wdmg\users\models\Users') && $user_id)
             $user = \wdmg\users\models\Users::findOne(['id' => intval($user_id)]);
 
         return $user ? $user->username : null;
