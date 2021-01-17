@@ -22,7 +22,7 @@ class m190522_145317_activity extends Migration
             'id' => $this->primaryKey(),
             'type' => $this->string(255)->notNull(),
             'message' => $this->text(),
-            'created_by' => $this->integer(11)->notNull()->defaultValue(0),
+            'created_by' => $this->integer(11)->null(),
             'created_at' => $this->integer(11)->notNull(),
             'action' => $this->string(255)->notNull(),
             'metadata' => $this->text(),
