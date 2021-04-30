@@ -93,6 +93,7 @@ Use the `Module::dashboardNavItems()` method of the module to generate a navigat
     ?>
 
 # Status and version [ready to use]
+* v.1.1.13 - Live auto-update for list
 * v.1.1.12 - Update README.md, added clear users activity log from console
 * v.1.1.11 - Update README.md and dependencies
 * v.1.1.10 - Added properties, refactoring setActivity() method

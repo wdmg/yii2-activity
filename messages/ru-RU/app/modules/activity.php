@@ -19,6 +19,8 @@ return [
     '&larr; Prev page' => '&larr; Предыдущая страница',
     'Next page &rarr;' => 'Следующая страница &rarr;',
 
+    '- Live auto-update' => '- Автообновление списка',
+
 ];
 
 ?>

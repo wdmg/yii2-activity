@@ -1,7 +1,8 @@
 Changelog
 =========
 
-## 1.1.*
+## 1.1.13 (2021-04-30)
+ * Live auto-update for list
  * Fixies for console operations
  
 ## 1.1.12 (2020-06-14)

@@ -15,9 +15,72 @@ $this->title = $this->context->module->name;
 $this->params['breadcrumbs'][] = $this->title;
 
 $this->registerJs(
-'setInterval(function(){
-        $.pjax.reload({timeout: false, container:\'#activityAjax\'});
-    }, 5000);', \yii\web\View::POS_READY
+    '
+    let pjaxInterval, freezTimeout;
+    let pjaxState = true;
+    
+    function reloadPJax(pjaxContainer) {
+        if (typeof pjaxContainer !== "undefined") {
+            if (pjaxState) {
+                pjaxState = false;
+                console.log("$.pjax.reload()");
+                $.pjax.reload({
+                    container: pjaxContainer,
+                    timeout: false
+                });
+            }
+        }
+    }
+    
+    function setAutoreloadPJax(pjaxContainer, updateInterval) {
+        if (typeof pjaxContainer !== "undefined" && $("[name=\"auto-update\"]").prop("checked")) {
+        
+            if (typeof updateInterval == "undefined")
+                updateInterval = 2000;
+            
+            pjaxInterval = setInterval(() => {
+                reloadPJax(pjaxContainer);
+                
+                $(document).on("pjax:success", () => {
+                    pjaxState = true;
+                    clearInterval(pjaxInterval);
+                    setTimeout(setAutoreloadPJax(pjaxContainer, updateInterval), updateInterval);
+                });
+                $(document).on("pjax:error", () => {
+                    pjaxState = false;
+                    clearInterval(pjaxInterval);
+                    setTimeout(setAutoreloadPJax(pjaxContainer, updateInterval), (updateInterval * 2));
+                });
+            }, updateInterval);
+        }
+    }
+    
+    $("body").on("click", () => {
+        pjaxState = false;
+        clearInterval(pjaxInterval);
+        clearTimeout(freezTimeout);
+        freezTimeout = setTimeout(() => {
+            pjaxState = true;
+            autoreloadPJax();
+        }, 2000);
+    });
+    
+    $(document).delegate("[name=\"auto-update\"]", "change", (event) => {
+        if (event.target.checked) {
+            pjaxState = true;
+            autoreloadPJax();
+        } else {
+            pjaxState = false;
+        }
+    });
+    
+    function autoreloadPJax() {
+        setAutoreloadPJax("#activityAjax", 5000);
+    }
+    
+    autoreloadPJax();
+    
+    ', \yii\web\View::POS_READY
 );
 
 ?>
@@ -28,12 +91,16 @@ $this->registerJs(
     </h1>
 </div>
 <div class="activity-index">
-    <?php
-        Pjax::begin([
-            'id' => 'activityAjax',
-            'timeout' => 5000
-        ]);
-        echo GridView::widget([
+    <?php Pjax::begin([
+        'id' => 'activityAjax',
+        'timeout' => 5000
+    ]); ?>
+    <div class="pull-right">
+        <?= Html::checkbox('auto-update', true, [
+            'label' => Yii::t('app/modules/activity', '- Live auto-update'),
+        ])?>
+    </div>
+    <?= GridView::widget([
             'dataProvider' => $activity,
             'layout' => '{summary}<br\/>{items}<br\/>{summary}<br\/><div class="text-center">{pager}</div>',
             'columns' => [
