@@ -1,6 +1,9 @@
 Changelog
 =========
 
+## 1.2.0 (2023-03-30)
+ * Update copyrights
+
 ## 1.1.13 (2021-04-30)
  * Live auto-update for list
  * Fixies for console operations
