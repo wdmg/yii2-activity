@@ -7,7 +7,6 @@ namespace wdmg\activity\components;
  * Yii2 Activity
  *
  * @category        Component
- * @version         1.1.13
  * @author          Alexsander Vyshnyvetskyy <alex.vyshnyvetskyy@gmail.com>
  * @link            https://github.com/wdmg/yii2-activity
  * @copyright       Copyright (c) 2019 - 2023 W.D.M.Group, Ukraine
