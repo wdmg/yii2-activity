@@ -8,7 +8,7 @@ use wdmg\widgets\SelectInput;
 use yii\bootstrap\Modal;
 
 /* @var $this yii\web\View */
-/* @var $model wdmg\activity\models\Activity */
+/* @var $searchModel wdmg\activity\models\Activity */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = $this->context->module->name;
@@ -66,6 +66,25 @@ $this->registerJs(
     });
     
     $(document).delegate("[name=\"auto-update\"]", "change", (event) => {
+        var data = {"autoupdate": event.target.checked};
+        $.ajax({
+            type: "POST",
+            url: "autoupdate",
+            data: data,
+            dataType: "json",
+            complete: function(data) {
+                if(data) {
+                    if (data.status == 200 && data.responseJSON.success) {
+                    
+                        if (data.autoupdate !== data.responseJSON.autoupdate)
+                            window.location.reload();
+                        
+                        return true;
+                    }
+                }
+            }
+        });
+    
         if (event.target.checked) {
             pjaxState = true;
             autoreloadPJax();
@@ -96,12 +115,13 @@ $this->registerJs(
         'timeout' => 5000
     ]); ?>
     <div class="pull-right">
-        <?= Html::checkbox('auto-update', true, [
+        <?= Html::checkbox('auto-update', $this->params['auto-update'], [
             'label' => Yii::t('app/modules/activity', '- Live auto-update'),
         ])?>
     </div>
     <?= GridView::widget([
-            'dataProvider' => $activity,
+            'dataProvider' => $dataProvider,
+            'filterModel' => $searchModel,
             'layout' => '{summary}<br\/>{items}<br\/>{summary}<br\/><div class="text-center">{pager}</div>',
             'columns' => [
                 [
@@ -110,8 +130,8 @@ $this->registerJs(
                 ],
                 [
                     "attribute" => "created_at",
-                    'value' => function($model, $indx) {
-                        return Yii::$app->getFormatter()->asDatetime($model->created_at, "dd.MM.yyyy hh:mm:ss");
+                    'value' => function($searchModel, $indx) {
+                        return Yii::$app->getFormatter()->asDatetime($searchModel->created_at, "dd.MM.yyyy hh:mm:ss");
                     },
                 ],
                 [
@@ -121,27 +141,68 @@ $this->registerJs(
                 [
                     "attribute" => "message",
                     "format" => "html",
-                    'value' => function($model, $indx) {
-                        return $model->message;
+                    'value' => function($searchModel, $indx) {
+                        return $searchModel->message;
                     },
                 ],
+	            [
+		            'attribute' => 'type',
+		            'format' => 'html',
+		            'filter' => SelectInput::widget([
+			            'model' => $searchModel,
+			            'attribute' => 'type',
+			            'items' => $searchModel->getTypesList(true),
+			            'options' => [
+				            'id' => 'activity-type',
+				            'class' => 'form-control'
+			            ]
+		            ]),
+		            'headerOptions' => [
+			            'class' => 'text-center'
+		            ],
+		            'contentOptions' => [
+			            'class' => 'text-center'
+		            ],
+		            'value' => function($data) {
+			            if ($data->type == $data::LOG_TYPE_ERROR)
+                            return '<span class="label label-danger">'.Yii::t('app/modules/activity', 'Error').'</span>';
+			            else if ($data->type == $data::LOG_TYPE_INFO)
+                            return '<span class="label label-info">'.Yii::t('app/modules/activity', 'Info').'</span>';
+                        else if ($data->type == $data::LOG_TYPE_SUCCESS)
+                            return '<span class="label label-success">'.Yii::t('app/modules/activity', 'Success').'</span>';
+                        else if ($data->type == $data::LOG_TYPE_WARNING)
+                            return '<span class="label label-danger">'.Yii::t('app/modules/activity', 'Warning').'</span>';
+                        else
+	                        return $data->type;
+		            }
+	            ],
                 [
                     "attribute" => "created_by",
-                    'value' => function($model, $indx) {
-                        $username = $model->getUsernameByID($model->created_by);
+	                'filter' => SelectInput::widget([
+		                'model' => $searchModel,
+		                'attribute' => 'created_by',
+		                'items' => $searchModel->getUsersList(true),
+		                'options' => [
+			                'id' => 'activity-created-by',
+			                'class' => 'form-control'
+		                ]
+	                ]),
+                    'value' => function($searchModel, $indx) {
+                        $username = $searchModel->getUsernameByID($searchModel->created_by);
                         if($username)
                             return $username;
                         else
-                            return $model::LOG_SUSTEM_ACTIVITY;
+                            return $searchModel::LOG_SUSTEM_ACTIVITY;
                     },
                 ],
                 [
                     "attribute" => "metadata",
                     'format' => 'raw',
-                    'value' => function($model) {
+                    'filter' => false,
+                    'value' => function($searchModel) {
 
                         $content = '<div>';
-                        $metadata = unserialize($model->metadata);
+                        $metadata = unserialize($searchModel->metadata);
                         if (count($metadata) > 0 && is_array($metadata)) {
                             foreach($metadata as $key => $value) {
                                 $content .= '<b>'.$key.'</b>&nbsp;'.var_export($value, true).'<br/>';
@@ -163,14 +224,14 @@ $this->registerJs(
                     },
                 ],
             ],
-            'rowOptions' => function ($model, $index, $widget, $grid) {
-                if($model->type == 'info')
+            'rowOptions' => function ($searchModel, $index, $widget, $grid) {
+                if($searchModel->type == 'info')
                     return ['class' => 'info'];
-                elseif ($model->type == 'danger')
+                elseif ($searchModel->type == 'error')
                     return ['class' => 'danger'];
-                elseif ($model->type == 'warning')
+                elseif ($searchModel->type == 'warning')
                     return ['class' => 'warning'];
-                elseif ($model->type == 'success')
+                elseif ($searchModel->type == 'success')
                     return ['class' => 'success'];
                 else
                     return [];

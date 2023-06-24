@@ -1,6 +1,10 @@
 Changelog
 =========
 
+## 1.2.1 (2023-06-24)
+ * Add filter/sort order
+ * Save autoupdate to user options
+
 ## 1.2.0 (2023-03-30)
  * Update copyrights
 

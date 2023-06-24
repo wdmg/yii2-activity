@@ -2,6 +2,7 @@
 
 namespace wdmg\activity\models;
 
+use wdmg\users\models\Users;
 use Yii;
 use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
@@ -148,6 +149,55 @@ class Activity extends ActiveRecord
         return $user ? $user->username : null;
     }
 
+	/**
+	 * @return array
+	 */
+	public function getTypesList($allTypes = false)
+	{
+		$list = [];
+		if ($allTypes) {
+			$list = [
+				'*' => Yii::t('app/modules/activity', 'All types')
+			];
+		}
+
+		$list = ArrayHelper::merge($list, [
+			self::LOG_TYPE_ERROR => Yii::t('app/modules/activity', 'Error'),
+			self::LOG_TYPE_INFO => Yii::t('app/modules/activity', 'Info'),
+			self::LOG_TYPE_SUCCESS => Yii::t('app/modules/activity', 'Success'),
+			self::LOG_TYPE_WARNING => Yii::t('app/modules/activity', 'Warning'),
+		]);
+
+		return $list;
+	}
+
+	/**
+	 * @return array
+	 */
+	public function getUsersList($allUsers = false)
+	{
+		$list = [];
+		if ($allUsers) {
+			$list = [
+				'*' => Yii::t('app/modules/activity', 'All users')
+			];
+		}
+
+		if (class_exists('\wdmg\users\models\Users')) {
+			$activityTable = self::tableName();
+			$usersTable = \wdmg\users\models\Users::tableName();
+			$users = \wdmg\users\models\Users::find()->where(["$usersTable.`status`" => \wdmg\users\models\Users::USR_STATUS_ACTIVE]);
+			$users->select(["$usersTable.`id`", "$usersTable.`username`", "$activityTable.`created_by`"]);
+			$users->leftJoin($activityTable, "$usersTable.`id` = $activityTable.`created_by`")->groupBy('created_by');
+			$list = ArrayHelper::merge($list, \wdmg\helpers\ArrayHelper::map($users->asArray()->all(), 'id', 'username'));
+		}
+
+		$list[] = [
+			'0' => Yii::t('app/modules/activity', 'System')
+		];
+
+		return $list;
+	}
 
     /**
      * @return object of \yii\db\ActiveQuery

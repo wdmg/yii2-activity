@@ -6,7 +6,7 @@ namespace wdmg\activity;
  * Yii2 Activity
  *
  * @category        Module
- * @version         1.2.0
+ * @version         1.2.1
  * @author          Alexsander Vyshnyvetskyy <alex.vyshnyvetskyy@gmail.com>
  * @link            https://github.com/wdmg/yii2-activity
  * @copyright       Copyright (c) 2019 - 2023 W.D.M.Group, Ukraine
@@ -46,12 +46,19 @@ class Module extends BaseModule
     /**
      * @var string the module version
      */
-    private $version = "1.2.0";
+    private $version = "1.2.1";
 
     /**
      * @var integer, priority of initialization
      */
     private $priority = 5;
+
+    /**
+     * Autoupdate list
+     *
+     * @var bool
+     */
+    public $autoupdateList = true;
 
     /**
      * Log of web-surfing activity
@@ -116,6 +123,9 @@ class Module extends BaseModule
 
         // Set priority of current module
         $this->setPriority($this->priority);
+
+        if (isset(Yii::$app->params['activity.autoupdateList']))
+            $this->autoupdateList = Yii::$app->params['activity.autoupdateList'];
 
         if (isset(Yii::$app->params['activity.surfingActivity']))
             $this->surfingActivity = Yii::$app->params['activity.surfingActivity'];
