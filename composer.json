@@ -4,7 +4,7 @@
   "keywords": ["yii2", "yii2-activity", "activity", "tracking", "wdmg"],
   "type": "yii2-extension",
   "license": "MIT",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "homepage": "https://github.com/wdmg/yii2-activity",
   "support": {
     "source": "https://github.com/wdmg/yii2-activity",
@@ -33,6 +33,7 @@
   "extra": {
     "options": {
       "routePrefix": "admin",
+      "autoupdateList": true,
       "surfingActivity": false,
       "backendSurfing": true,
       "frontendSurfing": false,
