@@ -1,6 +1,9 @@
 Changelog
 =========
 
+## 1.2.2 (2023-07-07)
+ * Update README.md and dependencies
+
 ## 1.2.1 (2023-06-24)
  * Add filter/sort order
  * Save autoupdate to user options

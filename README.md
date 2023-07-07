@@ -93,6 +93,7 @@ Use the `Module::dashboardNavItems()` method of the module to generate a navigat
     ?>
 
 # Status and version [ready to use]
+* v.1.2.2 - Update README.md and dependencies
 * v.1.2.1 - Add filter/sort order, save autoupdate to user options
 * v.1.2.0 - Update copyrights
 * v.1.1.13 - Live auto-update for list
